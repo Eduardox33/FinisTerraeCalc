@@ -1,5 +1,8 @@
 body{
     background-image: url("fondo.jpg");
+    background-repeat:no-repeat;
+    background-position: 30%;
+    background-size: 100% 3000px;
 }
 
 p{
