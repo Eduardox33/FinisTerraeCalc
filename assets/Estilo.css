@@ -4,7 +4,6 @@ html{
 
 body{
     background-image: url("fondo.jpg");
-    background-repeat:no-repeat;
     background-position: 30%;
     background-size: 3000px 3000px;
 }
