@@ -1,3 +1,7 @@
+html{
+    zoom:0.58;
+}
+
 body{
     background-image: url("fondo.jpg");
     background-repeat:no-repeat;
