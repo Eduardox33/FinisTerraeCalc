@@ -15,7 +15,7 @@ p{
 }
 
 .contenedor{
-    animation: tttt 1s;		
+    animation: tttt 0.9s;		
     border-radius: 20px;
     padding: 5px;
     width: 600px;
@@ -26,11 +26,11 @@ p{
 
 @keyframes tttt{
 	from{
-		transform: rotateY(-20deg);
+		transform: scale(0.9);
 		opacity: 0;
 	}
 	to{
-		transform: rotateY(0);
+		transform: scale(1);
 		opacity: 1;
 	}
 }
