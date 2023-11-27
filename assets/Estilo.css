@@ -15,12 +15,24 @@ p{
 }
 
 .contenedor{
+    animation: tttt 1s;		
     border-radius: 20px;
     padding: 5px;
     width: 600px;
     background-color: rgba(0, 0, 0, 0.76);
     margin: 50px auto;
     text-align: center;
+}
+
+@keyframes tttt{
+	from{
+		transform: rotateY(-20deg);
+		opacity: 0;
+	}
+	to{
+		transform: rotateY(0);
+		opacity: 1;
+	}
 }
 
 #Cuadro1{
