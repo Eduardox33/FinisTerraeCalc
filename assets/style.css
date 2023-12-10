@@ -1,0 +1,70 @@
+@keyframes introduction{
+    from{
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+body{
+    background-image: url("imgs/fondo.jpg");
+    background-position: 30%;
+    background-size: 3000px 3000px;
+}
+
+.contenedor{
+    background-color: rgba(0, 0, 0, 0.788);
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    text-align: center;
+    margin: auto;
+    width: 13em;
+    border-radius: 20px;
+    padding: 0.1em;
+}
+
+.inputs{
+    animation: introduction 0.9s;
+    width: 3em;
+    margin-top: 0px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.botones{
+    animation: introduction 1.2s;
+    width: 120px;
+    background-color: rgb(75, 75, 75);
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 50ms;
+    user-select: none;
+}
+
+.botones:active{
+    transform: scale(1.2);
+}
+
+#ponderaciones{
+    font-size: 15px;
+    text-align: center;
+    margin: auto;
+}
+
+th,td,tr{
+    animation: introduction 0.8s;
+    padding: 0.2em;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    background-color: rgba(94, 94, 94, 0.212);
+    border-radius: 8px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramos/Promedios</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/imgs/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/imgs/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/imgs/favicon-16x16.png">
+    <link rel="manifest" href="assets/imgs/site.webmanifest">
+</head>
+<body>
+    <div class="contenedor" style="padding-bottom: 0.2em;">
+        <p>Agregar Ramo</p>
+        <input id="ramo" class="inputs" style="width:10em;">
+        <div class="botones" onclick="agregar()">Agregar</div>
+        <p style="margin-bottom: 1px;">Scroll</p>
+        <p style="margin-top: 1px;"><-------></p>
+    </div>
+    
+    <div class="contenedor" style="width: 300px; margin-bottom: 20px; overflow-y: hidden; scale: 0.8; background-color: rgba(0, 0, 0, 0);">
+        <table id="Tabla_Ramos" style="background-color: rgba(255, 255, 255, 0.63); margin: 20px auto; border-radius: 10px; font-size: 14px; width: 1px;">
+            <thead>
+                <th>Nombre Ramo</th>
+                <th>Control 1</th>
+                <th>Control 2</th>
+                <th>Prom Labs</th>
+                <th>Proyecto</th>
+                <th>Opción</th>
+            </thead>
+        </table>
+    </div>
+
+    <div class="contenedor" style="padding-bottom: 1em; margin-bottom: 20px;">
+        <div class="botones" style="width: 170px" onclick="Dclear()">
+            Borrar Todo
+        </div>
+    </div>
+
+    <div class="contenedor" style="margin-bottom: 20px;">
+        <p>Calcular Promedios</p>
+        <p style="font-size: 13px; margin-bottom: 3px;">Colocar notas a promediar separadas por comas</p>
+        <input class="inputs" style="width:12em" id="notas">
+        <div class="botones" onclick="promediar()">Promediar</div>
+        <p id="resultado">Resultado: 0</p>
+    </div>
+
+    <div class="contenedor" style="padding-bottom: 1em; margin-top: 20px;">
+        <p>Calculadora</p>
+        <div class="botones" onclick="location.href='CalculadoraFinis.html'">Regresar</div>
+    </div>
+<script src="assets/ramos.js"></script>
+</body>
+</html>

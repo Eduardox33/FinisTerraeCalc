@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finis Calc 2</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/imgs/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/imgs/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/imgs/favicon-16x16.png">
+    <link rel="manifest" href="assets/imgs/site.webmanifest">
+</head>
+<body>
+
+<div class="contenedor" style="width: 340px; margin-bottom: 20px; padding-bottom: 1.2em;">
+<p>Ponderaciones</p>
+<p style="font-size: 14px;" id="error">Colocar porcentajes sin %</p>
+<table id="ponderaciones">
+<tr><th>Controles</th><th>Labs/Tall</th><th>Proyecto</th></tr>
+<tr>
+    <td><input id="p_controles" value="36" class="inputs"></td>
+    <td><input id="p_labs" value="14" class="inputs"></td>
+    <td><input id="p_proyecto" value="20" class="inputs"></td>
+</tr>    
+</table>
+<div style="display:inline-block;" class="botones" onclick="guardar()">Guardar</div>
+<div style="display:inline-block; width: 170px;" class="botones" onclick="defecto()">Por Defecto</div> 
+</div>
+
+<div class="contenedor">
+<p>Nota Presentación</p>
+<p style="font-size: 14px; margin-bottom: 3px;">Promedio controles</p>
+<input class="inputs" id="controles">
+<p style="font-size: 14px; margin-bottom: 3px;">Promedio Lab/Talleres</p>
+<input class="inputs" id="talleres">
+<p style="font-size: 14px; margin-bottom: 3px;">Proyecto</p>
+<input class="inputs" id="proyecto">
+<div class="botones" onclick="calcular1()">Calcular</div>
+<p id="total1">Total: 0</p>
+</div>
+
+<div class="contenedor" style="width: 15em; margin-top: 20px;">
+<p>Nota Examen Necesaria</p>
+<p style="font-size: 14px; margin-bottom: 3px;">Nota Presentación</p>
+<input class="inputs" id="presentacion">
+<div class="botones" onclick="calcular2()">Calcular</div>
+<p id="total2">Total: 0</p>
+</div>
+
+<div class="contenedor" style="margin-top: 20px; padding-bottom: 1.1em;">
+<p>Promedios/Ramos</p>
+<div class="botones" onclick="location.href='ramos.html'">Siguiente</div>
+</div>
+<script src="assets/calculadora.js"></script>
+</body>
+</html>
