@@ -21,7 +21,7 @@ function promediar(){
     }
 
     resultado /= notas.length;
-    resultado = (Math.round(resultado*10))/10;
+    resultado = (Math.round(resultado*1000))/1000;
     total.textContent = `Resultado: ${resultado}`
 };
 
