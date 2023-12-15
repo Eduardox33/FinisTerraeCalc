@@ -70,7 +70,7 @@ function calcular1(){
     total += talleres*p_labs;
     total += proyecto*p_proyecto;
     total /= pres;     
-    total = (Math.round(total*10))/10;
+    total = (Math.round(total*1000))/1000;
     if(isNaN(total)){
         return
     }
@@ -82,8 +82,8 @@ function calcular2(){
     if (presentacion<1 || presentacion>7){
         return
     }
-    var total = (3.96-(presentacion*0.7))/0.3
-    total = (Math.round(total*10))/10;
+    var total = (3.95-(presentacion*0.7))/0.3
+    total = (Math.round(total*1000))/1000;
     if(total>7){
         risa.play();
     }
