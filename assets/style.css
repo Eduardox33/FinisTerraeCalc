@@ -62,6 +62,7 @@ td{
 input{
     width: 3em;
     text-align: center;
+    background-color: white;
 }
 .boton{
     background-color:  rgb(53, 53, 53);
