@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramo</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/assist.css">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a onclick="blurAll();goTo('CalculadoraFinis.html#Ramos')">Regresar</a></li>
+        </ul>
+    </nav>
+    <section>
+        <div class="contenedor">
+            <div id="tec">
+                <input id="NOMBRE" onchange="changeName(this.value)" autocomplete="off" style="margin-bottom:0.5em;width:10em;font-size:20px;background-color: rgba(0, 0, 0, 0);color:white;">
+                <table>
+                    <tr>
+                        <td>Controles</td>
+                        <td>Labs/Tall</td>
+                        <td>Proyecto</td>
+                    </tr>
+                    <tr>
+                        <td><input type="number" id="ponControles" value="36" onInput="save()"></td>
+                        <td><input type="number" id="ponLabs" value="14" onInput="save()"></td>
+                        <td><input type="number" id="ponProyecto" value="20" onInput="save()"></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="tec2">
+                <table>
+                    <tr><td>Controles</td><td>Labs/Tall</td><td>Proyecto</td></tr>
+                    <tr><td><input onInput="save()" type="number" placeholder="Sol1" id="Sol1"></td><td><input onInput="save()" type="number" placeholder="Lab1" id="Lab1"></td><td><input onInput="save()" type="number" placeholder="E1" id="E1"></td></tr>
+                    <tr><td><input onInput="save()" type="number" placeholder="Sol2" id="Sol2"></td><td><input onInput="save()" type="number" placeholder="Lab2" id="Lab2"></td><td><input onInput="save()" type="number" placeholder="E2" id="E2"></td></tr>
+                    <tr><td></td><td><input onInput="save()" type="number" placeholder="Lab3" id="Lab3"></td><td><input onInput="save()" type="number" placeholder="E3" id="E3"></td></tr>
+                    <tr><td></td><td><input onInput="save()" type="number" placeholder="Tall1" id="Tall1"></td><td></td></tr>
+                    <tr><td></td><td><input onInput="save()" type="number" placeholder="Tall2" id="Tall2"></td><td></td></tr>
+                    <tr><td></td><td><input onInput="save()" type="number" placeholder="Tall3" id="Tall3"></td><td></td></tr>
+                    <tr><td></td><td><input onInput="save()" type="number" placeholder="Tall4" id="Tall4"></td><td></td></tr>
+                    <tr><td id="notControles">1.000</td><td id="notLabs">1.000</td><td id="notProyecto">1.000</td></tr>
+                </table>
+            </div>
+            <div>
+                <h1 id="notaPre">Nota Pre: 1.000</h1>
+                <div class="boton" style="width: 6em;" onclick="eliminar()">Eliminar</div>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/log.js"></script>
+    <script src="assets/ramo.js"></script>
+</body>
+</html>

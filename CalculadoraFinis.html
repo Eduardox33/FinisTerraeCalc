@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Finis</title>
+    <link rel="stylesheet" href="assets/style.css">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a onclick="blurAll();goTo('#Calculadora')">Calculadora</a></li>
+            <li><a onclick="blurAll();goTo('#Ramos')">Ramos</a></li>
+        </ul>
+    </nav>
+    <section id="Calculadora">
+        <div class="contenedor">
+            <div>
+                <h1>Ponderaciones</h1>
+                <table>
+                    <tr>
+                        <td>Controles</td>
+                        <td>Labs/Tall</td>
+                        <td>Proyecto</td>
+                    </tr>
+                    <tr>
+                        <td><input type="number" id="ponControles" value="36" onInput="calculadora()"></td>
+                        <td><input type="number" id="ponLabs" value="14" onInput="calculadora()"></td>
+                        <td><input type="number" id="ponProyecto" value="20" onInput="calculadora()"></td>
+                    </tr>
+                </table>
+                <div class="boton" style="width: 8em;" onclick="porDefecto()">Por Defecto</div>
+            </div>
+            <div>
+                <h1>Promedios</h1>
+                <table>
+                    <tr>
+                        <td>Controles</td>
+                        <td>Labs/Tall</td>
+                        <td>Proyecto</td>
+                    </tr>
+                    <tr>
+                        <td><input type="number" id="proControles" onInput="calculadora()"></td>
+                        <td><input type="number" id="proLabs" onInput="calculadora()"></td>
+                        <td><input type="number" id="proProyecto" onInput="calculadora()"></td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <h1>Nota Presentación</h1>
+                <input type="number" id="notaPresentacion" style="font-size: 1.5em;" onInput="examen()">
+            </div>
+            <div>
+                <h1>Nota Examen (Min)</h1>
+                <h1 id="notaExamen" style="color: rgb(192, 252, 192);">Nota: 1.000</h1>
+            </div>
+        </div>
+    </section>
+
+    <section id="Ramos">
+        <div class="contenedor">
+            <div>
+                <h1>Nuevo Ramo:</h1>
+                <div class="boton" style="width: 6em;font-size:18px;margin-top: 1em;" onclick="agregar()">Agregar</div>
+            </div>
+            <div>
+                <table id="tablaRamos">
+                    <tr><td style="font-size: 17px;font-weight: bold;">Ramos:</td></tr>
+                </table>
+            </div>
+        </div>
+    </section>
+    <div id="lista"></div>
+    <script src="assets/log.js"></script>
+    <script src="assets/logic.js"></script>
+    <script src="assets/ramos.js"></script>
+</body>
+</html>

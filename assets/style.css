@@ -1,0 +1,96 @@
+*{margin: 0;padding: 0;}
+html{
+    scroll-behavior: smooth;
+    width: 100%;
+    font-family:'Courier New', Courier, monospace;
+    user-select: none;
+    font-size: 80%;
+    overflow: hidden;
+}
+body{
+    background-image: url("fondo.jpg");
+    background-size: 150vw 200vh;
+}
+nav{
+    border-radius: 10px;
+    background-color: rgb(0, 0, 0);
+    position: fixed;
+    width: 100vw;
+    border: solid;
+    border-color: white;
+    box-sizing: border-box;
+    font-size: 20px;
+    z-index: 1000000;
+}
+ul{
+    display: flex;
+    list-style: none;
+    padding: 1em;
+    justify-content: space-around;
+}
+li a{
+    padding: 1em;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+section{height: 100vh;}
+h1{font-size: 20px;margin: 0.8em;}
+.contenedor{
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    position: relative;
+    left: 50vw;
+    top: 80px;
+    width: 80vw;
+    height: 75vh;
+    padding-top: 1em;
+    border-radius: 10px;
+    display: grid;
+    justify-content:space-around;
+
+    background: rgba(5, 5, 5, 0.87);
+    border-radius: 16px;
+    box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.562) inset,-10px -10px 10px rgba(255, 255, 255, 0.048) inset;
+    border: 1px solid rgba(5, 5, 5, 0.815);
+}
+table{
+    margin: auto;
+}
+td{
+    background-color: rgb(20, 20, 20);
+    padding: 5px;
+    border-radius: 5px;
+}
+input{
+    width: 3em;
+    text-align: center;
+    background-color: white;
+}
+.boton{
+    background-color:  rgb(53, 53, 53);
+    border-radius: 5px; 
+    margin: 0.5em auto;
+}
+.boton:active{
+    transform: scale(1.2);
+}
+@media(min-width: 500px){
+    .contenedor{
+        width: 490px;
+        margin: auto;
+        left: 0;
+        transform: translateX(0);
+    }
+    nav{width: 500px;left:50%;translate: -50%;}
+}
+@media(max-height: 560px){
+    h1{margin: 0;font-size: 14px;}
+    #tablaRamos{scale:0.7;}
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
