@@ -3,6 +3,7 @@
  "display": "standalone",
  "start_url": "../FinisTerraeCalc/CalculadoraFinis.html",
  "background_color":"black",
+ "theme_color": "black",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
