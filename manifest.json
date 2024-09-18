@@ -2,7 +2,7 @@
  "name": "FinisCalc",
  "display": "standalone",
  "start_url": "../FinisTerraeCalc/CalculadoraFinis.html",
- "theme_color":"black",
+ "background_color":"black",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
