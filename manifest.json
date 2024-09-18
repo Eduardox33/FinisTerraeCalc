@@ -1,7 +1,7 @@
 {
  "name": "FinisCalc",
  "display": "standalone",
- "start_url": "../CalculadoraFinis.html",
+ "start_url": "../FinisTerraeCalc/CalculadoraFinis.html",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
