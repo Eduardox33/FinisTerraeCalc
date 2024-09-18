@@ -1,6 +1,7 @@
 {
  "name": "FinisCalc",
- "display": "fullscreen",
+ "display": "standalone",
+ "start_url": "../CalculadoraFinis.html",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
@@ -34,13 +35,13 @@
   },
   {
    "src": "\/android-icon-192x192.png",
-   "sizes": "512x512",
+   "sizes": "192x192",
    "type": "image\/png",
    "density": "4.0"
   },
-  {
-   "src": "\/android-icon-192x192.png",
-   "sizes": "192x192",
+    {
+   "src": "\/apple-icon-152x152.png",
+   "sizes": "512x512",
    "type": "image\/png",
    "density": "4.0"
   }
