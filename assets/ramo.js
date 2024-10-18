@@ -94,7 +94,11 @@ function save(){
     }
 
     let CONTROL=promediar(l_solemnes,solemnes);
-    let LABS=((promediar(l_labs,labs)+promediar(l_talls,talls))/2);
+    
+    let LABS=0;
+    if(labs>0){LABS=((promediar(l_labs,labs)+promediar(l_talls,talls))/2);}
+    else{LABS=promediar(l_talls,talls);}
+    
     let PROYECTO=promediar(l_Es,Es);
 
     notControles.innerText=CONTROL.toFixed(3);
