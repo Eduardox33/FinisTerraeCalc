@@ -1,98 +1,440 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000000">
-    <title>Calculadora Finis</title>
-    <link rel="stylesheet" href="assets/style.css">
-    
-    <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#00A9E0">
+  <title>Calculadora de Notas • Universidad Finis Terrae</title>
 
+  <!-- PWA & Mobile Icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="msapplication-TileColor" content="#00A9E0">
+
+  <!-- Estilos Modernos Finis Terrae -->
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a onclick="blurAll();goTo('#Calculadora')">Calculadora</a></li>
-            <li><a onclick="blurAll();goTo('#Ramos')">Ramos</a></li>
-        </ul>
-    </nav>
-    <section id="Calculadora">
-        <div class="contenedor">
-            <div>
-                <h1>Ponderaciones</h1>
-                <table>
-                    <tr>
-                        <td>Controles</td>
-                        <td>Labs/Tall</td>
-                        <td>Proyecto</td>
-                    </tr>
-                    <tr>
-                        <td><input type="number" id="ponControles" value="36" onInput="calculadora()"></td>
-                        <td><input type="number" id="ponLabs" value="14" onInput="calculadora()"></td>
-                        <td><input type="number" id="ponProyecto" value="20" onInput="calculadora()"></td>
-                    </tr>
-                </table>
-                <div class="boton" style="width: 8em;" onclick="porDefecto()">Por Defecto</div>
-            </div>
-            <div>
-                <h1>Promedios</h1>
-                <table>
-                    <tr>
-                        <td>Controles</td>
-                        <td>Labs/Tall</td>
-                        <td>Proyecto</td>
-                    </tr>
-                    <tr>
-                        <td><input type="number" id="proControles" onInput="calculadora()"></td>
-                        <td><input type="number" id="proLabs" onInput="calculadora()"></td>
-                        <td><input type="number" id="proProyecto" onInput="calculadora()"></td>
-                    </tr>
-                </table>
-            </div>
-            <div>
-                <h1>Nota Presentación</h1>
-                <input type="number" id="notaPresentacion" style="font-size: 1.5em;" onInput="examen()">
-            </div>
-            <div>
-                <h1>Nota Examen (Min)</h1>
-                <h1 id="notaExamen" style="color: rgb(192, 252, 192);">Nota: 1.000</h1>
-            </div>
-        </div>
-    </section>
 
-    <section id="Ramos">
-        <div class="contenedor">
-            <div>
-                <h1>Nuevo Ramo:</h1>
-                <div class="boton" style="width: 6em;font-size:18px;margin-top: 1em;" onclick="agregar()">Agregar</div>
-            </div>
-            <div>
-                <table id="tablaRamos">
-                    <tr><td style="font-size: 17px;font-weight: bold;">Ramos:</td></tr>
-                </table>
-            </div>
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- App Wrapper -->
+  <div class="app-container">
+
+    <!-- Header Finis Terrae -->
+    <header class="app-header">
+      <div class="header-top">
+        <div class="brand-wrapper">
+          <h1 class="brand-title">Finis Calc</h1>
+          <span class="brand-subtitle">Universidad Finis Terrae</span>
         </div>
-    </section>
-    <div id="lista"></div>
-    <script src="assets/log.js"></script>
-    <script src="assets/logic.js"></script>
-    <script src="assets/ramos.js"></script>
+        <div class="header-actions">
+          <!-- Botón de Modo Noche -->
+          <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="Cambiar modo claro / noche">
+            🌙
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs (Navegación superior limpia) -->
+      <nav class="app-tabs">
+        <button class="tab-btn active" data-tab="calculadora" onclick="switchTab('calculadora')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+            <line x1="8" y1="6" x2="16" y2="6"></line>
+            <line x1="16" y1="14" x2="16" y2="18"></line>
+            <path d="M16 10h.01"></path>
+            <path d="M12 10h.01"></path>
+            <path d="M8 10h.01"></path>
+            <path d="M12 14h.01"></path>
+            <path d="M8 14h.01"></path>
+            <path d="M12 18h.01"></path>
+            <path d="M8 18h.01"></path>
+          </svg>
+          Calc. Rápida
+        </button>
+
+        <button class="tab-btn" data-tab="ramos" onclick="switchTab('ramos')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          Mis Ramos
+        </button>
+
+        <button class="tab-btn" data-tab="detalle" onclick="switchTab('detalle')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+          Editar Ramo
+        </button>
+      </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+      <!-- ======================================= -->
+      <!-- VISTA 1 (POR DEFECTO): CALCULADORA RÁPIDA -->
+      <!-- ======================================= -->
+      <section id="view_calculadora" class="view-section active">
+        <div class="white-card">
+          <div class="card-header-bar">
+            <h2>Calculadora Rápida</h2>
+            <button class="back-btn" onclick="resetQuickCalcToDefaults()" title="Restablecer valores originales">
+              Por Defecto
+            </button>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--ft-text-secondary); margin-bottom: 12px;">
+            Simulación instantánea con ponderaciones oficiales (36 / 20 / 14 divididas por 0.7):
+          </p>
+
+          <!-- 1. Ponderaciones oficiales -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--ft-text-primary); text-transform: uppercase;">
+              1. Ponderaciones (%)
+            </label>
+            <span id="qc_totalPonBadge" class="total-pon-badge badge-success">
+              70% (÷ 0.70)
+            </span>
+          </div>
+
+          <div class="ponderaciones-grid" style="margin-bottom: 14px;">
+            <div class="pon-input-box">
+              <span class="pon-label">📝 Controles</span>
+              <input type="number" id="qc_ponControles" class="pon-input" value="36" oninput="calculateQuickCalc()">
+            </div>
+            <div class="pon-input-box">
+              <span class="pon-label">🚀 Proyecto</span>
+              <input type="number" id="qc_ponProyecto" class="pon-input" value="20" oninput="calculateQuickCalc()">
+            </div>
+            <div class="pon-input-box">
+              <span class="pon-label">🔬 Labs/Tall</span>
+              <input type="number" id="qc_ponLabs" class="pon-input" value="14" oninput="calculateQuickCalc()">
+            </div>
+          </div>
+
+          <!-- 2. Promedios de las 3 categorías -->
+          <label style="font-size: 0.75rem; font-weight: 700; color: var(--ft-text-primary); text-transform: uppercase; display: block; margin-bottom: 6px;">
+            2. Promedios Obtenidos (1.0 a 7.0)
+          </label>
+          <div class="ponderaciones-grid" style="margin-bottom: 14px;">
+            <div class="pon-input-box">
+              <span class="pon-label">Controles</span>
+              <input type="text" inputmode="decimal" id="qc_notaControles" class="pon-input" placeholder="ej: 5.5" oninput="calculateQuickCalc()">
+            </div>
+            <div class="pon-input-box">
+              <span class="pon-label">Proyecto</span>
+              <input type="text" inputmode="decimal" id="qc_notaProyecto" class="pon-input" placeholder="ej: 6.0" oninput="calculateQuickCalc()">
+            </div>
+            <div class="pon-input-box">
+              <span class="pon-label">Labs/Tall</span>
+              <input type="text" inputmode="decimal" id="qc_notaLabs" class="pon-input" placeholder="ej: 5.0" oninput="calculateQuickCalc()">
+            </div>
+          </div>
+
+          <!-- 3. Entrada Directa de Nota de Presentación -->
+          <div style="background: var(--ft-bg); border: 1px solid var(--ft-border); border-radius: var(--ft-radius-sm); padding: 10px 14px; margin-bottom: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--ft-text-primary);">
+                Nota Presentación Directa:
+              </span>
+              <input 
+                type="text" 
+                inputmode="decimal" 
+                id="qc_notaPresentacion" 
+                class="pon-input" 
+                placeholder="—" 
+                style="width: 75px; background: var(--ft-surface); border: 1px solid var(--ft-primary); border-radius: 6px; padding: 4px;"
+                oninput="handleDirectPresentacionInput(this.value)"
+              >
+            </div>
+            <span style="font-size: 0.7rem; color: var(--ft-text-muted); display: block; margin-top: 3px;">
+              Se calcula automáticamente arriba o puedes escribirla directamente aquí.
+            </span>
+          </div>
+
+          <!-- Resultados Quick Calc -->
+          <div class="result-card" style="margin-top: 10px;">
+            <div class="result-box" style="margin-bottom: 8px;">
+              <div class="result-box-label">Nota Examen Mínima Requerida</div>
+              <div id="qc_resultExamen" class="result-box-value" style="font-size: 1.6rem; color: #FFFFFF;">
+                Nota: 1.000
+              </div>
+              <div class="result-box-desc">Para aprobar el ramo con nota final 3.95 (4.0)</div>
+            </div>
+
+            <div id="qc_resultBadge" class="result-status-banner">
+              ℹ️ Ingresa tus notas para simular tu examen.
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 14px;">
+            <button class="finis-card-btn" style="flex: 1; padding: 12px 14px; min-height: 50px;" onclick="switchTab('ramos')">
+              <div class="card-title-group">
+                <span class="card-title">Ver Mis Ramos</span>
+                <span class="card-subtitle">Administrar asignaturas</span>
+              </div>
+              <span class="card-chevron">❯</span>
+            </button>
+            <button class="add-ramo-btn" style="padding: 12px 18px;" onclick="createNewRamo()">
+              <span>＋</span> Nuevo Ramo
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================= -->
+      <!-- VISTA 2: DASHBOARD DE RAMOS -->
+      <!-- ======================================= -->
+      <section id="view_ramos" class="view-section">
+        
+        <!-- Finis Action Cards Grid -->
+        <div class="finis-menu-grid">
+          <button class="finis-card-btn" onclick="createNewRamo()">
+            <div class="card-title-group">
+              <span class="card-title">Nuevo Ramo</span>
+              <span class="card-subtitle">36% C / 20% P / 14% L</span>
+            </div>
+            <span class="card-chevron">＋</span>
+          </button>
+
+          <button class="finis-card-btn" onclick="switchTab('calculadora')">
+            <div class="card-title-group">
+              <span class="card-title">Calc. Rápida</span>
+              <span class="card-subtitle">Simulador directo</span>
+            </div>
+            <span class="card-chevron">⚡</span>
+          </button>
+
+          <div class="finis-card-btn" style="cursor: default;">
+            <div class="card-title-group">
+              <span class="card-title">Promedio General</span>
+              <span class="card-subtitle">Todos tus ramos</span>
+            </div>
+            <span id="averageGpaBadge" class="preview-score" style="color: #FFFFFF; font-size: 1.4rem;">—</span>
+          </div>
+
+          <button class="finis-card-btn" onclick="openHelpModal()">
+            <div class="card-title-group">
+              <span class="card-title">Ponderaciones</span>
+              <span class="card-subtitle">36 + 20 + 14 = 70%</span>
+            </div>
+            <span class="card-chevron">ℹ</span>
+          </button>
+        </div>
+
+        <!-- Lista de Ramos Guardados -->
+        <div class="white-card">
+          <div class="ramos-header">
+            <h2 class="section-title">
+              Mis Ramos Guardados
+            </h2>
+            <span id="totalRamosBadge" class="ramo-badge badge-info">0 Ramos</span>
+          </div>
+
+          <div id="ramosListContainer" class="ramos-list">
+            <!-- Inyectado dinámicamente por app.js -->
+          </div>
+
+          <div style="margin-top: 14px; text-align: center;">
+            <button class="add-ramo-btn" onclick="createNewRamo()">
+              <span>＋</span> Agregar Otro Ramo
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ======================================= -->
+      <!-- VISTA 3: DETALLE Y EDICIÓN DEL RAMO -->
+      <!-- ======================================= -->
+      <section id="view_detalle" class="view-section">
+        
+        <!-- Header de Acciones de Ramo -->
+        <div class="ramo-top-actions">
+          <button class="back-btn" onclick="switchTab('ramos')">
+            <span>❮</span> Mis Ramos
+          </button>
+          <span id="autoSaveIndicator" style="font-size: 0.75rem; color: var(--ft-success); font-weight: 600; opacity: 0; transition: opacity 0.3s ease;">
+            ✓ Guardado automático
+          </span>
+        </div>
+
+        <!-- Nombre del Ramo Editable -->
+        <div class="white-card" style="padding: 10px 14px; margin-bottom: 12px;">
+          <label style="font-size: 0.72rem; font-weight: 600; color: var(--ft-text-muted); text-transform: uppercase;">
+            Nombre de la Asignatura
+          </label>
+          <input 
+            type="text" 
+            id="detailRamoName" 
+            class="ramo-title-input" 
+            placeholder="Ej: Cálculo I, Programación..."
+            oninput="handleRamoNameChange(this.value)"
+          >
+        </div>
+
+        <!-- Ponderaciones oficiales: 36, 20, 14 (Total 70% dividido por 0.7) -->
+        <div class="ponderaciones-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--ft-text-primary);">
+              Ponderaciones (%)
+            </h3>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span id="detailTotalPonBadge" class="total-pon-badge badge-success">
+                70% (÷ 0.70)
+              </span>
+              <button class="back-btn" style="padding: 3px 8px; font-size: 0.72rem;" onclick="setRamoPonderacionesPorDefecto()" title="Restablecer 36 / 20 / 14">
+                36/20/14
+              </button>
+            </div>
+          </div>
+
+          <div class="ponderaciones-grid">
+            <div class="pon-input-box">
+              <span class="pon-label">📝 Controles</span>
+              <input 
+                type="number" 
+                id="detailPonControles" 
+                class="pon-input" 
+                value="36" 
+                min="0" 
+                max="100"
+                oninput="handlePonderacionChange('controles', this.value)"
+              >
+            </div>
+
+            <div class="pon-input-box">
+              <span class="pon-label">🚀 Proyecto</span>
+              <input 
+                type="number" 
+                id="detailPonProyecto" 
+                class="pon-input" 
+                value="20" 
+                min="0" 
+                max="100"
+                oninput="handlePonderacionChange('proyecto', this.value)"
+              >
+            </div>
+
+            <div class="pon-input-box">
+              <span class="pon-label">🔬 Labs/Tall</span>
+              <input 
+                type="number" 
+                id="detailPonLabs" 
+                class="pon-input" 
+                value="14" 
+                min="0" 
+                max="100"
+                oninput="handlePonderacionChange('laboratorios', this.value)"
+              >
+            </div>
+          </div>
+          <div class="total-pon-indicator">
+            <span>Suman 70% y se dividen por 0.7 para obtener la Nota de Presentación.</span>
+          </div>
+        </div>
+
+        <!-- 1. CATEGORÍA: CONTROLES -->
+        <div class="category-card">
+          <div class="category-header">
+            <div class="cat-title-group">
+              <div class="cat-icon">📝</div>
+              <span class="cat-name">1. Controles</span>
+            </div>
+            <span id="avgTag_controles" class="cat-average-tag">Promedio: —</span>
+          </div>
+          <div id="gradesContainer_controles" class="grades-grid">
+            <!-- Celdas dinámicas inyectadas por app.js -->
+          </div>
+        </div>
+
+        <!-- 2. CATEGORÍA: PROYECTO -->
+        <div class="category-card">
+          <div class="category-header">
+            <div class="cat-title-group">
+              <div class="cat-icon">🚀</div>
+              <span class="cat-name">2. Proyecto</span>
+            </div>
+            <span id="avgTag_proyecto" class="cat-average-tag">Promedio: —</span>
+          </div>
+          <div id="gradesContainer_proyecto" class="grades-grid">
+            <!-- Celdas dinámicas inyectadas por app.js -->
+          </div>
+        </div>
+
+        <!-- 3. CATEGORÍA: LABORATORIOS -->
+        <div class="category-card">
+          <div class="category-header">
+            <div class="cat-title-group">
+              <div class="cat-icon">🔬</div>
+              <span class="cat-name">3. Laboratorios / Talleres</span>
+            </div>
+            <span id="avgTag_laboratorios" class="cat-average-tag">Promedio: —</span>
+          </div>
+          <div id="gradesContainer_laboratorios" class="grades-grid">
+            <!-- Celdas dinámicas inyectadas por app.js -->
+          </div>
+        </div>
+
+        <!-- TARJETA DE RESULTADOS -->
+        <div class="result-card">
+          <div class="result-grid">
+            <div class="result-box">
+              <div class="result-box-label">Nota Presentación</div>
+              <div id="detailResultNp" class="result-box-value">—</div>
+              <div class="result-box-desc">Dividido por 0.70 (70% final)</div>
+            </div>
+
+            <div class="result-box">
+              <div class="result-box-label">Examen Mínimo</div>
+              <div id="detailResultExamen" class="result-box-value">—</div>
+              <div class="result-box-desc">Para aprobar con 4.0</div>
+            </div>
+          </div>
+
+          <div id="detailResultBanner" class="result-status-banner">
+            <span>ℹ️</span> <span>Ingresa tus notas para calcular tu estado académico.</span>
+          </div>
+        </div>
+
+        <!-- Botones de Acción de Ramo -->
+        <div class="detail-actions-row">
+          <button class="btn-secondary" onclick="duplicateCurrentRamo()">
+            <span>📄</span> Duplicar
+          </button>
+          <button class="btn-secondary" onclick="resetCurrentRamoGrades()">
+            <span>🧹</span> Vaciar Notas
+          </button>
+          <button class="btn-danger" onclick="promptDeleteCurrentRamo()">
+            <span>🗑️</span> Eliminar
+          </button>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Modal Dialog -->
+  <div id="appModalOverlay" class="modal-overlay" onclick="closeModal()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <h3 id="appModalTitle" class="modal-title">Mensaje</h3>
+      <div id="appModalBody" class="modal-body">Contenido</div>
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+        <button class="add-ramo-btn" onclick="confirmModalAction()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/app.js"></script>
 </body>
 </html>
