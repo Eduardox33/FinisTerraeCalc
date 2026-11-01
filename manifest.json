@@ -4,8 +4,8 @@
   "description": "Calculadora de notas, ponderaciones y ramos para estudiantes de la Universidad Finis Terrae",
   "start_url": "CalculadoraFinis.html",
   "display": "standalone",
-  "background_color": "#00A9E0",
-  "theme_color": "#00A9E0",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "icons": [
     {
       "src": "android-icon-36x36.png",
