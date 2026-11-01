@@ -2,15 +2,189 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=CalculadoraFinis.html">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora de Notas • Universidad Finis Terrae</title>
-  <script>
-    window.location.replace("CalculadoraFinis.html");
-  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0284C7">
+  <title>Calculadora Finis Terrae</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="manifest.json">
+
+  <link rel="stylesheet" href="assets/style.css">
 </head>
-<body style="font-family: sans-serif; text-align: center; padding: 40px; background-color: #F0F6FA; color: #00A9E0;">
-  <h2>Calculadora de Notas • Finis Terrae</h2>
-  <p>Cargando aplicación... <a href="CalculadoraFinis.html">Haz clic aquí si no redirige</a>.</p>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">Finis<span>Calc</span></div>
+      <button id="themeToggleBtn" class="theme-btn" onclick="toggleTheme()" title="Cambiar tema">🌙</button>
+    </header>
+
+    <!-- Navegación -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="calculadora" onclick="switchTab('calculadora')">Calculadora</button>
+      <button class="tab-btn" data-tab="ramos" onclick="switchTab('ramos')">Mis Ramos</button>
+      <button class="tab-btn" data-tab="detalle" onclick="switchTab('detalle')">Editar</button>
+    </nav>
+
+    <!-- VISTA 1: CALCULADORA RÁPIDA -->
+    <section id="view_calculadora" class="view-section active">
+      <div class="card">
+        <div class="card-title">
+          <span>Ponderaciones (%)</span>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <span id="qc_totalBadge" class="badge badge-success">70% (÷ 0.70)</span>
+            <button class="btn btn-outline btn-sm" onclick="resetQuickCalc()">Defecto</button>
+          </div>
+        </div>
+
+        <div class="weights-grid">
+          <div class="input-group">
+            <span class="input-label">Controles</span>
+            <input type="number" id="qc_ponC" class="input-field" value="36" oninput="calculateQuickCalc()">
+          </div>
+          <div class="input-group">
+            <span class="input-label">Proyecto</span>
+            <input type="number" id="qc_ponP" class="input-field" value="20" oninput="calculateQuickCalc()">
+          </div>
+          <div class="input-group">
+            <span class="input-label">Labs</span>
+            <input type="number" id="qc_ponL" class="input-field" value="14" oninput="calculateQuickCalc()">
+          </div>
+        </div>
+
+        <div class="card-title" style="margin-top: 12px;">Notas / Promedios</div>
+        <div class="weights-grid">
+          <input type="text" inputmode="decimal" id="qc_notaC" class="input-field" placeholder="Controles" oninput="calculateQuickCalc()">
+          <input type="text" inputmode="decimal" id="qc_notaP" class="input-field" placeholder="Proyecto" oninput="calculateQuickCalc()">
+          <input type="text" inputmode="decimal" id="qc_notaL" class="input-field" placeholder="Labs" oninput="calculateQuickCalc()">
+        </div>
+
+        <div class="direct-np-row">
+          <label for="qc_npDirect">O nota de presentación directa:</label>
+          <input type="text" inputmode="decimal" id="qc_npDirect" class="input-field" placeholder="—" oninput="calculateQuickCalc()">
+        </div>
+
+        <div class="result-box">
+          <div class="result-target">Examen Requerido</div>
+          <div id="qc_resultVal" class="result-val">—</div>
+          <div id="qc_resultNote" class="result-note">Ingresa tus notas o promedio</div>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: 14px;">
+          <button class="btn btn-outline" onclick="switchTab('ramos')">Ver Ramos</button>
+          <button class="btn btn-primary" onclick="createNewRamo()">＋ Nuevo Ramo</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISTA 2: LISTA DE RAMOS -->
+    <section id="view_ramos" class="view-section">
+      <div class="card" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px;">
+        <span style="font-size: 0.85rem; color: var(--text-muted);">Promedio General:</span>
+        <span id="averageGpa" style="font-size: 1.15rem; font-weight: 700; color: var(--primary);">—</span>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span>Ramos</span>
+          <span id="ramosCount" class="badge badge-muted">0 ramos</span>
+        </div>
+        <div id="ramosList"></div>
+        <button class="btn btn-primary" style="margin-top: 10px;" onclick="createNewRamo()">＋ Agregar Ramo</button>
+      </div>
+    </section>
+
+    <!-- VISTA 3: DETALLE / EDICIÓN -->
+    <section id="view_detalle" class="view-section">
+      <div class="card">
+        <div class="input-group" style="margin-bottom: 14px;">
+          <span class="input-label">Nombre del Ramo</span>
+          <input type="text" id="detailName" class="input-field" style="text-align: left; font-weight: 600;" placeholder="Nombre de asignatura" oninput="handleNameChange(this.value)">
+        </div>
+
+        <div class="card-title">
+          <span>Ponderaciones (%)</span>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <span id="detailTotalBadge" class="badge badge-success">70% (÷ 0.70)</span>
+            <button class="btn btn-outline btn-sm" onclick="resetDetailWeights()">36/20/14</button>
+          </div>
+        </div>
+
+        <div class="weights-grid" style="margin-bottom: 16px;">
+          <div class="input-group">
+            <span class="input-label">Controles</span>
+            <input type="number" id="detailPonC" class="input-field" value="36" oninput="handleWeightChange('controles', this.value)">
+          </div>
+          <div class="input-group">
+            <span class="input-label">Proyecto</span>
+            <input type="number" id="detailPonP" class="input-field" value="20" oninput="handleWeightChange('proyecto', this.value)">
+          </div>
+          <div class="input-group">
+            <span class="input-label">Labs</span>
+            <input type="number" id="detailPonL" class="input-field" value="14" oninput="handleWeightChange('laboratorios', this.value)">
+          </div>
+        </div>
+
+        <!-- Categoría 1: Controles -->
+        <div class="card-title">
+          <span>Controles</span>
+          <span id="avg_controles" style="font-weight: 600; color: var(--primary);">—</span>
+        </div>
+        <div id="grades_controles" class="grade-cells" style="margin-bottom: 14px;"></div>
+
+        <!-- Categoría 2: Proyecto -->
+        <div class="card-title">
+          <span>Proyecto</span>
+          <span id="avg_proyecto" style="font-weight: 600; color: var(--primary);">—</span>
+        </div>
+        <div id="grades_proyecto" class="grade-cells" style="margin-bottom: 14px;"></div>
+
+        <!-- Categoría 3: Labs -->
+        <div class="card-title">
+          <span>Laboratorios</span>
+          <span id="avg_laboratorios" style="font-weight: 600; color: var(--primary);">—</span>
+        </div>
+        <div id="grades_laboratorios" class="grade-cells" style="margin-bottom: 16px;"></div>
+
+        <!-- Resultado Ramo -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px;">
+          <div style="background: var(--surface-subtle); padding: 10px; border-radius: var(--radius-sm); text-align: center;">
+            <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 2px;">Presentación</div>
+            <div id="detailNpVal" style="font-size: 1.25rem; font-weight: 700;">—</div>
+          </div>
+          <div style="background: var(--surface-subtle); padding: 10px; border-radius: var(--radius-sm); text-align: center;">
+            <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 2px;">Examen Mínimo</div>
+            <div id="detailExamVal" style="font-size: 1.25rem; font-weight: 700; color: var(--primary);">—</div>
+          </div>
+        </div>
+
+        <!-- Acciones -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;">
+          <button class="btn btn-outline btn-sm" onclick="duplicateCurrentRamo()">Duplicar</button>
+          <button class="btn btn-outline btn-sm" onclick="clearCurrentGrades()">Vaciar</button>
+          <button class="btn btn-danger btn-sm" onclick="promptDeleteRamo()">Eliminar</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal -->
+  <div id="modalOverlay" class="modal-overlay" onclick="closeModal()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <h3 id="modalTitle" style="font-size: 1rem; margin-bottom: 6px;">Confirmar</h3>
+      <p id="modalText" style="font-size: 0.85rem; color: var(--text-muted);"></p>
+      <div class="modal-actions">
+        <button class="btn btn-outline btn-sm" onclick="closeModal()">Cancelar</button>
+        <button class="btn btn-danger btn-sm" onclick="confirmModal()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="assets/app.js"></script>
 </body>
 </html>
